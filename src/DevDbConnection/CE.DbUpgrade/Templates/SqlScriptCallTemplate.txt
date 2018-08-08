@@ -1,0 +1,2 @@
+﻿		SetMessage("{action} {name}...")
+        ProcessQueryByName("{name}")

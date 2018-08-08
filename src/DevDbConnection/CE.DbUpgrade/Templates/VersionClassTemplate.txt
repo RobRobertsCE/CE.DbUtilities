@@ -1,0 +1,19 @@
+﻿' ReSharper disable once InconsistentNaming
+' ReSharper disable once CheckNamespace
+Public Class Upgrade{major}_{minor}_{dbVersion}
+    Inherits UpgradeBase
+
+    Private Shared ReadOnly VersionConst As New Version({major}, {minor}, {dbVersion})
+    Public Overrides ReadOnly Property Version As Version
+        Get
+            Return VersionConst
+        End Get
+    End Property
+
+    Protected Overrides Function ExecuteCore() As Boolean
+        {versionClassCalls}
+
+        Return True
+    End Function
+
+End Class
