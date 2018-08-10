@@ -11,6 +11,7 @@ namespace CE.DbConnect.Models
         [Key(), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid ServerId { get; set; }
         public string Name { get; set; }
+        public bool IsDefault { get; set; }
         public String SqlVersion { get; set; }
         [ForeignKey("MachineInstance")]
         public virtual Guid MachineId { get; set; }

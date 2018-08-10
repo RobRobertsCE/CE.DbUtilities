@@ -150,11 +150,6 @@ namespace CE.PfsConnect.Models
                 sb.Append(connection.WriteLines(true));
             }
 
-            //foreach (var connection in Connections.Where(c => c.IsActive == false))
-            //{
-            //    sb.AppendLine(connection.WriteLines(true, true));
-            //}
-
             return sb.ToString();
         }
         #endregion

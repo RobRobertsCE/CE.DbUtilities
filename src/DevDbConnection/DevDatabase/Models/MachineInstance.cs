@@ -11,6 +11,7 @@ namespace CE.DbConnect.Models
         [Key(), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid MachineId { get; set; }
         public string Name { get; set; }
+        public bool IsLocal { get; set; }
         public virtual IList<ServerInstance> ServerInstances { get; set; }
 
         public MachineInstance()

@@ -530,9 +530,31 @@ namespace CE.DbConnectionHelper.Controllers
 
                     if (model == null)
                     {
-                        var instanceNames = pfsConnection.DataSource.Split('\\');
-                        var machineName = instanceNames[0];
-                        var sqlInstance = instanceNames[1];
+                        // 'DataSource', 'Server' are interchangeable
+
+                        // Support localhost, (local), ., sources with a machine name, and sources without a machine name.
+
+                        // Examples
+                        //  Data Source=(local)\sql2012;
+                        //
+                        //
+                        //
+                        string machineName;
+                        string sqlInstanceName;
+
+                        if (pfsConnection.DataSource.Contains("\\"))
+                        {
+                            var dataSourceSections = pfsConnection.DataSource.Split('\\');
+                            machineName = dataSourceSections[0];
+                            sqlInstanceName = dataSourceSections[1];
+                        }
+                        else
+                        {
+                            machineName = pfsConnection.DataSource;
+                            sqlInstanceName = "<Default>";
+                        }
+
+                        
                         var machineModel = _dbContext.Machines.FirstOrDefault(m => m.Name == machineName);
                         if (machineModel == null)
                         {
@@ -544,13 +566,13 @@ namespace CE.DbConnectionHelper.Controllers
                             _dbContext.Machines.Add(machineModel);
                         }
 
-                        var serverModel = _dbContext.Servers.FirstOrDefault(s => s.Name == sqlInstance && s.MachineId == machineModel.MachineId);
+                        var serverModel = _dbContext.Servers.FirstOrDefault(s => s.Name == sqlInstanceName && s.MachineId == machineModel.MachineId);
                         if (serverModel == null)
                         {
                             serverModel = new DbConnect.Models.ServerInstance()
                             {
                                 ServerId = Guid.NewGuid(),
-                                Name = sqlInstance,
+                                Name = sqlInstanceName,
                                 MachineId = machineModel.MachineId
                             };
 

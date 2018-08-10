@@ -27,7 +27,35 @@ namespace CE.PfsConnect.Models
             SectionLines = new List<string>();
             foreach (var key in EntryKeys)
             {
-                Entries.Add(key.ToString(), "");
+                switch (key)
+                {
+                    case PfsConnectEntries.IntegratedSecurity:
+                        {
+                            Entries.Add(key.ToString(), "0");
+                            break;
+                        }
+                    case PfsConnectEntries.PasswordEncryption:
+                        {
+                            Entries.Add(key.ToString(), "0");
+                            break;
+                        }
+                    case PfsConnectEntries.PacketSize:
+                        {
+                            Entries.Add(key.ToString(), "4096");
+                            break;
+                        }
+                    case PfsConnectEntries.StationNo:
+                        {
+                            Entries.Add(key.ToString(), "99");
+                            break;
+                        }
+                    default:
+                        {
+                            Entries.Add(key.ToString(), "");
+                            break;
+                        }
+                }
+
             }
         }
         #endregion

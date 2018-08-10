@@ -6,7 +6,8 @@ namespace CE.DbConnect.Data
     public class DevelopmentContext
         : DbContext, IDevelopmentContext
     {
-        public const string cn = @"Server=ROB-PC\SQLEXPRESS;Database=Development;User Id=sa;Password=sql;";
+        //public const string cn = @"Server=ROB-PC\SQLEXPRESS;Database=Development;User Id=sa;Password=sql;";
+        public const string cn = @"Server=.\SQLEXPRESS;Database=Development;User Id=sa;Password=sql1234!;";
 
         public virtual DbSet<DatabaseInstance> Databases { get; set; }
         public virtual DbSet<MachineInstance> Machines { get; set; }
